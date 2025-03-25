@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>pro05</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+<!-- FirstServlet클래스(서버페이지)를 요청할 매핑 작업 --> 
+  <servlet>
+  	<servlet-name>aaa</servlet-name><!-- /first 와  sec01.ex01.FirstServlet 경로를 연결할 공통 별칭 -->
+  	<servlet-class>sec01.ex01.FirstServlet</servlet-class><!-- 실제 요청할 서블릿 클래스 주소 경로 작성 -->
+  </servlet> 
+  <servlet-mapping>
+  	<servlet-name>aaa</servlet-name><!-- /first 와  sec01.ex01.FirstServlet 경로를 연결할 공통 별칭 -->
+  	<url-pattern>/first</url-pattern><!-- http://localhost:8090/pro05/first 웹브라우저에서 요청할 가상주소 설정 -->
+  </servlet-mapping>
+  
+<!-- SecondServlet클래스(서버페이지)를 요청할 매핑 작업 -->  
+   <!-- 1. SecondServlet 서블릿클래스를 등록하는 부분 -->
+   <servlet>
+  	  <!-- 웹브라우저에서 요청하는 주소와 실제 서블릿 클래스의 경로를 연결하는 공통 이름 -->
+   	  <servlet-name>bbb</servlet-name>
+   	  <!-- 실제 서블릿 클래스의 경로를 지정 -->
+   	  <servlet-class>sec01.ex01.SecondServlet</servlet-class>
+   </servlet>
+  
+  <!-- 2. SecondServlet클래스의 경로와 웹브라우저에서 요청하는 주소를 매핑 하는 부분 -->
+    <servlet-mapping>
+	  <!-- 웹브라우저에서 요청하는 주소와 실제 서블릿 클래스의 경로를 연결하는 공통 이름 -->
+   	  <servlet-name>bbb</servlet-name>     
+      <!-- 웹브라우저에서 요청하는 주소 설정 -->
+      <url-pattern>/second</url-pattern>
+    </servlet-mapping>
+    
+    <!-- 
+    	웹브라우저에서 http://localhost:8090/프로젝트이름/secod를 입력하여 요청하면
+    	bbb라는 공통 이름과 연결된 SecodServlet클래스가 요청을 받습니다. 
+     -->
+  
+ 
+</web-app>
+
+
+
+
+
+
+
+
+
+
+
+
