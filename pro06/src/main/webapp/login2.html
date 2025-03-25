@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 
+		login.html 정적인 문서 웹브라우저를 통해 요청하는 순서
+		
+		1. 사용자가 웹브라우저에서 http://localhost:8090/pro06/login.html을 입력하고 엔터를 칩니다.
+		   이 요청은 HTTP프로토콜 요청 규칙 중 GET요청(조회)입니다. (요약 : 사용자는 login.html 정적파일 요청합니다.)
+		   
+		2. 아파치 웹서버는 localhost:8090으로 들어오는 요청을 처리합니다.
+		   pro06 웹프로젝트 폴더의 login.html 정적 문서를 찾아 HTML태그들을 실행해서 웹브라우저로 보내려합니다.
+		   
+		3. 웹서버가 HTTP프로토콜의 응답메세지를 생성해서 웹브라우저로 보내게됩니다.
+		   그러면 사용자가 웹브라우저를 통해서 HTML태그들의 디자인을 화면에 보게됩니다.   
+	 -->
+
+
+	<!-- 서블릿(서버페이지)에게 입력한 아이디, 비밀번호를 전달해 로그인 요청을 하는 정적 디자인 페이지 -->
+	<!-- http://localhost:8090/pro06/login 요청 주소로 서블릿에 로그인 요청 -->
+	
+	<!-- 아래의 아이디 <input>태그에 입력하여 서블릿에 요청하면 name 속성의 값 user_id와 
+	     입력한 아이디를 함께 묶어서 HttpServletRequest메모리에 담아 전송하게 됨 
+	
+	     아래의 비밀번호 <input>태그에 입력하여 서블릿에 요청하면 name 속성의 값 user_pw와
+	     입력한 비밀번호를 함께 묶어서 HttpServletRequest메모리에 담아 전송하게 됨
+	-->
+	<form action="login2" name="frmLogin" method="get">
+		아이디 : <input type="text" name="user_id"><br>			<!-- (user_id-admin) -->
+		비밀번호 : <input type="password" name="user_pw"><br>		<!-- (user_pw-1234) -->
+		<input type="submit" value="로그인">
+		<input type="reset" value="다시입력">	
+	</form>
+</body>
+</html>
