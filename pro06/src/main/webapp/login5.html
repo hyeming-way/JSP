@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<script>
+		//아이디와 비밀번호 입력 후 로그인 버튼을 클릭하면 호출되는 함수로서
+		//모두 입력했는지 유효성 검사하는 함수
+		//만약 모두 입력했으면 <form>의 action속성에 설정된 매핑주소에 의해
+		//서블릿(서버페이지)로 요청하게 됩니다.
+		function fn_validate(){
+			//<form>태그의 name속성값으로 <form></form>태그 한 쌍을 선택해서 가져와 변수에 저장
+			let frmLogin = document.login;
+			
+			//<form>태그 내부에 작성된 자식<input>태그 2개에 입력한 값 얻어 저장
+			//1. 입력한 아이디 저장
+			let user_id = frmLogin.user_id.value;
+			//2. 입력한 비밀번호 저장
+			let user_pw = frmLogin.user_pw.value;
+			
+			//아이디 또는 비밀번호 둘 중 하나라도 입력하지않았다면?
+			if( (user_id.length == 0 || user_id == "") || (user_pw.length == 0 || user_pw == "") ){
+				window.alert("아이디와 비밀번호는 필수로 입력해주세요.");
+			} else { //모두 입력했다면?
+				//<form>태그의 요청전송 방식을 post로 다시 설정
+				frmLogin.method = "post";
+				//<form>태그의 action속성의 서블릿 매핑 주소를 login5로 다시 설정
+				frmLogin.action = "login5";
+				//자바스크립트 문법으로 <form>의 action속성에 설정된 login5를 이용해
+				//LoginServlet 서블릿 클래스에 로그인 요청하자
+				frmLogin.submit();
+			}
+			
+		}
+	</script>
+
+</head>
+<body>
+	<form action="login" name="login" method="get">
+	
+		<!-- 
+		type = "hidden"으로 설정하면 <input>디자인은 웹브라우저 화면에 출력하지않고
+		요청할 값(name-value)묶어서 HttpServletRequest객체메모리에 담아서
+		서블릿으로 전송하게 됩니다.
+		 -->
+		<input type="hidden" name="user_address" value="서울시 성북구">
+		
+		아이디 : <input type="text" name="user_id"><br>			
+		비밀번호 : <input type="password" name="user_pw"><br>	
+			
+		<input type="button" value="로그인" onclick="fn_validate();">
+		<input type="reset" value="다시입력">	
+	</form>
+</body>
+</html>

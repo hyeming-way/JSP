@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인 폼</title>
+
+<script>
+    // 로그인 버튼을 눌렀을 때 실행되는 함수
+    function fn_validate(event) {
+        // 1. event매개변수로 이벤트가 발생한 <form>의 정보가 저장된 onsubmit이벤트객체를 전달받아
+        //    form의 기본 제출 동작(서버로 전송)을 막음
+        //    기본적으로 <form> 태그는 submit 버튼이 눌리면 서버로 데이터를 전송하는데,
+        //    유효성 검사를 먼저 수행하기 위해 이를 중지함.
+        event.preventDefault();
+
+        // 2. <form> 태그를 가져오기 (name="login" 사용)
+        let frmLogin = document.login;
+
+        // 3. 사용자 입력값 가져오기
+        let user_id = frmLogin.user_id.value;  // 아이디 입력값
+        let user_pw = frmLogin.user_pw.value;  // 비밀번호 입력값
+
+        // 4. 아이디 또는 비밀번호가 입력되지 않은 경우
+        if (user_id.trim() === "" || user_pw.trim() === "") {  
+            // 공백 제거 후 길이가 0이면 입력되지 않은 것으로 판단
+            alert("아이디와 비밀번호는 필수로 입력해야 합니다.");
+        } else {
+            // 5. 모든 입력이 정상적으로 되었을 때, 서버로 전송 준비
+            frmLogin.method = "post"; // 전송 방식 변경 (기본은 "get"이었음)
+            frmLogin.action = "login5"; // 데이터를 보낼 서버 주소 변경
+
+            // 6. 유효성 검사를 통과했으므로 폼을 서버로 전송
+            frmLogin.submit();
+        }
+    }
+</script>
+</head>
+<body>
+    <!-- onsubmit 이벤트를 사용하여 폼이 제출될 때 fn_validate 함수 호출 -->
+    <form action="login" name="login" method="get" onsubmit="fn_validate(event)">
+        <!-- type="hidden"을 사용하여 사용자 주소 값을 서버로 전송 (화면에는 보이지 않음) -->
+        <input type="hidden" name="user_address" value="서울시 성북구">
+
+        <!-- 사용자 아이디 입력 필드 -->
+        아이디 : <input type="text" name="user_id"> <br>
+        
+        <!-- 사용자 비밀번호 입력 필드 -->
+        비밀번호 : <input type="password" name="user_pw"> <br>
+
+        <!-- 로그인 버튼 (submit 타입이므로 폼이 자동 제출됨) -->
+        <input type="submit" value="로그인">
+
+        <!-- 입력한 값 초기화 버튼 -->
+        <input type="reset" value="취소">
+    </form>
+</body>
+</html>
