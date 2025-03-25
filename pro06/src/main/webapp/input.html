@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="input1" name="frmInput" method="get">
+		아이디 : <input type="text" name="user_id"><br>			<!-- (user_id-admin) -->
+		비밀번호 : <input type="password" name="user_pw"><br>		<!-- (user_pw-1234) -->
+		
+		<!-- 
+			여러개의 <input>을 만들때는 체크박스를 사용해서 value 속성값을 설정하는 것이 좋습니다.
+			체크박스의 name 속성값은 모두 subject이므로 서블릿으로 전송할 때
+			체크된 값들만 String 배열에 담고 HttpServletRequest 객체메모리에 저장 후 전송합니다.
+			
+			향후 서블릿 페이지에서 요청한 체크한 값들을 한번에 얻기 위해 getParameterValues()메소드를 이용
+		 -->
+		 
+		<input type="checkbox" name="subject" value="java">자바
+		<input type="checkbox" name="subject" value="c">씨
+		<input type="checkbox" name="subject" value="jsp">제이에스피
+		<input type="checkbox" name="subject" value="android">안드로이드		
+		
+		<br><br>		
+		
+		<input type="submit" value="로그인">
+		<input type="reset" value="다시입력">	
+	</form>
+</body>
+</html>
