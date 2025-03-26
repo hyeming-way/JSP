@@ -1,4 +1,4 @@
-package sec01.ex01;
+package sec01.ex02;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 	라고 http://localhost:8090/pro07/member 조회 주소 요청을 받아
 	응답하는 서블릿
 */
-//@WebServlet("/member")
+@WebServlet("/member")
 public class MemberServlet extends HttpServlet {
 	
 	@Override

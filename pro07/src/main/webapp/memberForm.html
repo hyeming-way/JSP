@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+	<!-- JQuery 사용을 위한 js불러오기  -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
+	<script type="text/javascript">
+		//아래의 <form>태그 내부에 작성된 <input>태그들에 가입할 내용이
+		//입력되었는지 검사하는 함수로 "가입요청" 버튼을 클릭했을때 호출됩니다.
+		function fn_sendMember(){
+			//아이디,비밀번호,이름,이메일을 입력할수 있는 <input>을 선택해서 가져와 변수에 저장
+			let idInput = $("input[name='id']");
+			let pwdInput = $("input[name='pwd']");
+			let nameInput = $("input[name='name']");
+			let emailInput = $("input[name='email']");
+			
+			//아래의 <form></form>한쌍을 선택해서 변수에 저장
+			let formTag = document.frmMember;
+			
+			//아이디, 비밀번호, 이름 , 이메일을 입력했는지 검사
+			//1. 아이디 미입력 했다면?
+			if(idInput.val() == "" || idInput.val().length  == 0 ){
+			
+				alert("아이디를 입력해야 합니다.");
+			
+			//2. 비밀번호 미입력 했다면?
+			}else if(pwdInput.val() == "" || pwdInput.val().length == 0){
+				
+				alert("비밀번호를 입력해야 합니다.");
+			
+			//3. 이름을 미입력 했다면?
+			}else if(nameInput.val() == "" || nameInput.val().length == 0){
+				
+				alert("이름을 입력해야 합니다.");
+				
+			//4. 이메일 미입력 했다면?	
+			}else if(emailInput.val() == "" || emailInput.val().length == 0){
+				
+				alert("이메일을 입력해야 합니다.");
+			
+			//5. 가입할 내용을 모두 입력했다면?
+			}else{
+				//아래의 <form></form>선택해서 가져와 
+				//method속성에 "post"로 설정하고,
+				//action속성에 "member4"로 설정하고 
+				//submit(); 함수를 호출해  MemberServlet서블릿으로 회원가입 요청 합니다.
+				formTag.method = "post";
+				formTag.action = "member3";
+				formTag.submit();
+			}		
+							
+		}	
+	</script>
+</head>
+<body>
+
+	<h1>회원 가입 화면</h1>
+
+<!--  회원 가입 요청을 위해 입력하는 디자인 화면 페이지  -->
+	<form name="frmMember">
+	<!-- 현재 <form>태그로 요청하는 기능은 새 회원을 DB의 t_member테이블에 추가시켜줘~라고
+	     서블릿에게 알려줄수 있게 input type="hidden"으로 하고 value="addMember"
+	   name="command"로 작성해 놓자.
+	 -->
+		<input type="hidden" name="command" value="addMember" >
+			
+		<table>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id"></td> <!-- 입력한 아이디를 서블릿으로 전송함 -->
+			</tr>
+			<tr>
+				<td>비밀번호</td>
+				<td><input type="password" name="pwd"></td> 
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td><input type="text" name="name"></td> 
+			</tr>			
+			<tr>
+				<td>이메일</td>
+				<td><input type="email" name="email"></td> 
+			</tr>			
+		</table>	
+		<input type="button" value="가입요청" onclick="fn_sendMember();">
+		<input type="reset" value="다시입력">
+	</form>
+
+
+</body>
+</html>
+
+
+
+
