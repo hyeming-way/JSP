@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 
+		login.html파일 설명
+		- 클라이언트가 웹브라우저를 이용해 로그인 요청하는 디자인 화면 파일
+	 -->
+	
+	<form action="login2" name="loginForm" method="post">
+		
+		아이디 : <input type="text" name="user_id"> <br>
+		비밀번호 : <input type="password" name="user_pw"> <br>
+		
+		<!-- <input type=hidden> 태그에 주소, 이메일, 전화번호를 value 속성에 설정한 후 서블릿으로 요청시 전달 --> 
+		<input type="hidden" name="user_address" value="서울시 성북구">
+		<input type="hidden" name="user_email" value="test@gmail.com">
+		<input type="hidden" name="user_hp" value="010-111-2222">
+	
+		<!-- 입력한 아이디와 비밀번호 그리고 주소, 이메일, 전화번호를 서버페이지(서블릿)로 전송해서 요청할 전송 버튼 -->
+		<input type="submit" value="로그인">
+		
+		<!-- 입력한 아이디와 비밀번호를 다시 작성하기 위해 초기화할 용도의 리셋버튼 -->
+		<input type="reset" value="다시입력">
+	
+	</form>
+
+<!-- 
+		 login2.html파일 설명
+		 - 클라이언트가 웹브라우저를 이용해 로그인 요청하는 디자인 화면 파일 
+		 
+		 <form>태그의 여러가지 속성과 기능에 대한 표
+		 
+		 	속성					기능
+		 	action				<form>태그 내부의 입력태그들에 입력한 요청정보들을
+		 						서버페이지(서블릿이나 JSP)로 요청전송할때
+		 						서버페이지의 주소 경로를 지정하는 속성
+		 						
+		 						action속성의 값으로 login이라고 작성 했다.
+		 						http://localhost:8081/pro06/이뒤에 서블릿페이지를 요청할
+		 						매칭 주소를 login을 적어 주자.
+			
+			name				<form>태그의 이름을 지정합니다.
+								지정하는 이유는 여러개의 <form>태그가 존재할떄 
+								<form>태그 한쌍을 구분하는 이름을 설정할떄 사용합니다.
+								또한 자바스크립트 문법에서 <form>태그를 선택해 올떄
+								name속성에 대한 값을 이용해서 선택해 올수도 있습니다.
+								예)  document.loginForm
+			
+			method 				<form>태그 내부에 입력한 데이터를 서버페이지(서블릿)로 전송할때
+								전송방법을 지정하는 속성입니다.
+								
+								GET전송 방법
+								- 서블릿에 데이터를 요청 전송할때 요청할 데이터가
+								  요청할주소(URL)뒤에 name=value형태로 노출되어 전송하는 방법입니다.
+								  예) http://localhost:8081/pro06/login?name1=value&name2=value2
+								- 보안에 취약합니다.
+								- 기본 전송 방식이고 사용이 쉽습니다.(method=get 이라고 적어주지 않는 경우)
+								- 웹 브라우저 주소창에 직접 주소를 입력해서 전송하는 방식이기도 합니다.
+								- 서블릿(서버페이지)에서는 doGet()메소드에서 요청 전송된 데이터를 받아서 처리함
+								- GET전송방식은 서버페이지로 전송할 데이터량이 적고 간단한 정보를 전달할때 사용함
+								- 서버페이지로 전송할 데이터가 민감한정보(로그인 및 개인정보)의 전송에는
+								  적합하지 않습니다.
+								- 전송 데이터 크기가 정해 져 있습니다.
+								
+								
+								POST전송 방법
+								- POST전송 방법은 클라이언트의 웹브라우저에서 서버페이지로 
+								  데이터를 HTTP요청 본문에 포함하여 전송하는 방법 입니다.
+								  이때 데이터는 요청 헤더와 별도로 전달되며, 웹브라우저의 주소창에 요청데이터가 표시 되지 않습니다.
+								- 이방식은 대용량의 요청할 데이터 전송 및 민감한 정보 전달에 적합하며,
+								  GET전송방법의 제한 사항을 극복할수 있습니다.
+								- POST전송방식은 데이터 전송이 상대적으로 느리고 복잡한 구조일수 있으나,
+								  보안성이 상대적으로 높습니다. 
+								- 서블릿(톰캣서버가실행하는서버페이지)에서는 doPost()메소드에서 요청 전송된 데이터를 받아서 처리함
+			
+		encType					파일 업로드 요청을 서버페이지로 할때 값으로 multipart/form-data로 설정해야함.
+			
+			
+ -->
+
+
+</body>
+</html>
