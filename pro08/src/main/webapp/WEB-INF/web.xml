@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>pro08</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 
+  	<context-param>는 서블릿 컨텍스트에 전역적으로 사용되는 초기화 파라미터를 설정하는 부분입니다.
+  	서블릿 컨텍스트(ServletContext공유객체)는 웹 애플리케이션의 전체 범위에서 사용할 수 있는 데이터를 저장하는 영역입니다.
+  	각 <context-param>은 애플리케이션 전체에서 공통으로 사용할 파라미터 값을 설정합니다.
+   -->
+  <context-param>
+  	<param-name>menu_member</param-name>
+  	<param-value>회원등록 회원조회 회원수정</param-value> <!-- 여러 항목들을 빈 공백으로 구분하여 작성 -->
+  </context-param>
+  
+  <context-param>
+    <param-name>menu_order</param-name>
+  	<param-value>주문조회 주문등록 주문수정 주문취소</param-value> 
+  </context-param>
+  
+  <context-param>
+    <param-name>menu_goods</param-name>
+  	<param-value>상품조회 상품등록 상품수정 상품삭제</param-value> 
+  </context-param>
+  
+  <!-- EmailServlet 서블릿클래스의 객체를 톰캣에 등록하고, 이메일 발송 톰캣서버에 초기화파라미터 지정(변수에 값 지정) -->
+  <servlet>
+  
+  	<servlet-name>EmailServlet</servlet-name>
+  	<servlet-class>com.example.servlet.EmailServlet</servlet-class>
+  	<!-- EmailServlet 서블릿 클래스에 전달할 초기값을 변수를 만들고 저장 -->
+  	
+  	<init-param>
+  		<!-- 이메일 발송서버 주소를 설정합니다. -->
+  		<param-name>serverAddress</param-name>
+  		<param-value>smtp.example.com</param-value> <!-- 이메일 서버 주소 -->
+  	</init-param>
+  	
+  	<init-param>
+  		<!-- 이메일 발송 서버의 포트번호를 설정합니다. -->
+  		<param-name>serverPort</param-name>
+  		<param-value>587</param-value> <!-- 이메일 서버 포트 번호 -->
+  	</init-param>
+  	
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>EmailServlet</servlet-name>
+  	<url-pattern>/sendEmail</url-pattern>
+  </servlet-mapping>
+  
+</web-app>
