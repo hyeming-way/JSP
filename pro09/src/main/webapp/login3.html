@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 
+		login3.html파일 설명
+		- 클라이언트가 웹브라우저를 이용해 로그인 요청하는 디자인 화면 파일
+	 -->
+	
+	<form action="login3" name="loginForm" method="post">
+		
+		아이디 : <input type="text" name="username"> <br>
+		비밀번호 : <input type="password" name="password"> <br>
+		
+	
+		<!-- 입력한 아이디와 비밀번호 그리고 주소, 이메일, 전화번호를 서버페이지(서블릿)로 전송해서 요청할 전송 버튼 -->
+		<button type="submit">로그인</button>
+		
+		<!-- 입력한 아이디와 비밀번호를 다시 작성하기 위해 초기화할 용도의 리셋버튼 -->
+		<input type="reset" value="다시입력">
+	
+	</form>
+	
+</body>
+</html>
