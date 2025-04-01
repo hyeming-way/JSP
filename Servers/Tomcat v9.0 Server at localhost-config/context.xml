@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+--><!-- The contents of this file will be loaded for each web application --><Context>
+
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>WEB-INF/tomcat-web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <Manager pathname="" />
+
+<!-- MySQL데이터베이스와 미리 연결을 맺어 놓은 커넥션들이 저장되는 커넥션풀DataSource객체 설정   자세히 설명-->    
+<!-- 
+    name="jdbc/jspbeginner"  
+         이 리소스의 JNDI(Java Naming and Directory Interface) 이름을 지정. 
+         웹 애플리케이션에서 "java:comp/env/jdbc/jspbeginner"로 참조 가능
+
+    auth="Container"  
+    설명-> 이 리소스의 인증을 컨테이너(Tomcat 등)가 관리하도록 설정 
+
+    type="javax.sql.DataSource"  
+    설명-> 데이터베이스 연결을 관리하는 DataSource 객체의 타입을 지정
+
+    driverClassName="com.mysql.cj.jdbc.Driver"  
+    설명-> MySQL JDBC 드라이버 클래스 지정 (MySQL 8.0 이상에서는 com.mysql.cj.jdbc.Driver 사용)
+
+
+    url="jdbc:mysql://localhost:3306/jspbeginner?serverTimezone=Asia/Seoul"    
+    설명-> 데이터베이스 연결 URL 
+         - jdbc:mysql://localhost:3306/jspbeginner : MySQL 서버의 'jspbeginner' 데이터베이스에 연결 
+         - localhost : MySQL 서버가 실행 중인 컴퓨터 (현재 이 서버) 
+         - 3306 : MySQL 기본 포트 번호
+         - serverTimezone=Asia/Seou` : MySQL 서버와 클라이언트의 시간대를 한국 시간(UTC+9)으로 설정 
+
+    username="jspid"  
+    설명-> MySQL 데이터베이스에 접속할 사용자 이름
+
+    password="jsppass"  
+    설명-> MySQL 데이터베이스에 접속할 비밀번호 
+
+    maxActive="50"  
+    설명-> 최대 50개의 데이터베이스 연결(Connection)을 동시에 유지 가능 (커넥션 풀의 최대 크기) 
+
+    maxWait="-1"  
+    설명-> 커넥션이 부족할 때, 새로운 커넥션을 기다리는 최대 시간 (밀리초 단위)
+         - -1은 무제한으로 대기한다는 의미 (즉, 연결이 가능할 때까지 계속 대기)
+-->
+
+<!-- MySQL데이터베이스와 미리 연결을 맺어 놓은 커넥션들이 저장되는 커넥션풀DataSource객체 설정 -->    	
+	 <Resource     
+    	name="jdbc/jspbeginner"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/jspbeginner?serverTimezone=Asia/Seoul"
+    	username="jspid"
+    	password="jsppass"
+    	maxActive="50"
+    	maxWait="-1"
+    
+    />
+<!-- 이클립스 console창에 경고 메세지 -> 
+         Loading class `com.mysql.jdbc.Driver'. 
+         This is deprecated. 
+         The new driver class is `com.mysql.cj.jdbc.Driver'. 
+         The driver is automatically registered via the SPI and 
+         manual loading of the driver class is generally unnecessary.
+    		
+    	 경고 메시지는 작동에는 영향을 주지 않지만, 최신 버전에 맞춰 수정하는 것이 좋음. 
+    	 com.mysql.jdbc.Driver는 더 이상 사용되지 않으므로 com.mysql.cj.jdbc.Driver로 변경해야 함.
+     
+
+참고2.
+		url="jdbc:mysql://localhost:3306/jspbeginner?serverTimezone=Asia/Seoul" 에서 
+		
+		?serverTimezone=Asia/Seoul 코드의 역할
+		
+		-> MySQL 서버의 기본 시간대가 UTC(협정 세계시)로 설정되어 있을 수 있음
+		   이를 Asia/Seoul(한국 시간, KST)으로 맞춰서 시간 관련 오류를 방지
+		
+		-> 서버와 클라이언트의 시간대가 일치하지 않으면 날짜/시간 데이터가 잘못 저장되거나 조회될 가능성이 있음
+		   serverTimezone=Asia/Seoul을 명시적으로 지정하여 시간 차이 문제를 방지
+		
+		-> MySQL 8.0 이상에서는 JDBC URL에 명확한 serverTimezone 설정이 없으면 연결 시 오류가 발생할 수 있음.
+		   예를 들어, 서버 시간(UTC)과 클라이언트 시간(Asia/Seoul)이 다르면,
+		   DATETIME 값을 저장하고 불러올 때 9시간 차이가 발생할 수 있음.
+		   serverTimezone=Asia/Seoul을 지정하면 MySQL이 한국 시간(KST, UTC+9)으로 인식하고 데이터를 다룸.
+     -->
+    
+
+    <!-- Oracle데이터베이스와 미리 연결을 맺어 놓은 커넥션객체들이 저장되는 커넥션풀DataSource객체 설정  -->
+    <Resource     
+    	name="jdbc/oracle"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:XE"
+    	username="scott"
+    	password="tiger"
+    	maxActive="50"
+    	maxWait="-1"
+    
+    />
+    
+    <!-- 
+    	톰캣서버를 요청하면 톰캣서버는 context.xml설정파일의 코드내용을 읽어들이면서
+    	Resource태그의 정보(커넥션풀 DataSource)의 객체를 생성해서 톰캣 메모리에 보관해 둡니다.
+    	
+    	name = "커넥션풀을 외부 MembeDAO.java에서 가져다 사용할 JNDI기법의 key"
+    	auth = "인증 주체 톰캣서버 Container"
+    	type = "데이터소스 커넥션풀 클래스"
+    	driverClassName = "연결할 DBMS종류에 따른 드라이버 클래스 경로"
+    	url = "접속할 데이터베이스 IP주소와 포트번호 및 SID"
+    	username = "데이터베이스 접속 ID"
+    	password = "데이터베이스 접속 비밀번호"
+    	maxActive = "동시에 최대로 데이터베이스에 연결할수 있는 Connection객체 수"
+    	maxWait = "새로운 연결이 생길떄따지 기다릴수 있는 최대 시간"
+    	
+      다른 속성들은 고정적으로 사용되며, 주로 driverClassName, username, password, url속성만 변경해서 사용하면됨
+     -->
+    
+    
+</Context>
+
+
+
+
+
+
+
+
+
+
+
