@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>pro12</display-name>
+  <welcome-file-list>
+  	<welcome-file>/test02/main.jsp</welcome-file>
+  	<welcome-file>/hello.jsp</welcome-file>
+  	<welcome-file>/scoreTest.html</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 각각의 발생한 예외 코드 종류에 따라 예외처리할 jsp 경로 다르게 설정 -->
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/err/error_404.jsp</location>
+  </error-page>
+  
+   <error-page>
+  	<error-code>500</error-code>
+  	<location>/err/error_500.jsp</location>
+  </error-page>
+  
+</web-app>
